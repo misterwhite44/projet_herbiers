@@ -1,0 +1,29 @@
+<div class="visualisation-container">
+    {% for row in visualisation %}
+        <div class="visualisation-row">
+            {% for cell in row %}
+                <div class="visualisation-cell {% if cell == 1 %}blue{% endif %}"></div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+</div>
+
+<style>
+    .visualisation-container {
+        display: grid;
+    }
+
+    .visualisation-row {
+        display: flex;
+    }
+
+    .visualisation-cell {
+        width: 20px;
+        height: 20px;
+        border: 1px solid #000;
+    }
+
+    .blue {
+        background-color: blue;
+    }
+</style>

@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails du Lieu{% endblock %}
+
+{% block body %}
+    <h1>Détails du Lieu</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>ID</th>
+            <td>{{ lieu.id }}</td>
+        </tr>
+        <tr>
+            <th>Nom</th>
+            <td>{{ lieu.nom }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-dark" href="{{ path('app_lieu_index') }}">Retour liste</a>
+    <a class="btn btn-primary" href="{{ path('app_lieu_modifier', {'id': lieu.id}) }}">Modifier</a>
+    <br>
+    {{ include('lieu/_formulaire_suppression.html.twig') }}
+{% endblock %}

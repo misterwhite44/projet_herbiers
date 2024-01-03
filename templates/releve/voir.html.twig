@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails du Relevé{% endblock %}
+
+{% block body %}
+    <h1>Détails du Relevé</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Date</th>
+            <td>{{ releve.date|date('d/m/Y') }}</td>
+        </tr>
+        <tr>
+            <th>Lieu</th>
+            <td>{{ releve.lieu.nom }}</td>
+        </tr>
+        <tr>
+            <th>Relevé Brut</th>
+            <td>{{ releve.releveBrut }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-dark" href="{{ path('app_releve_index') }}">Retour liste</a>
+    <a class="btn btn-primary" href="{{ path('app_releve_modifier', {'id': releve.id}) }}">Modifier</a>
+    <br>
+    {{ include('releve/_formulaire_suppression.html.twig') }}
+{% endblock %}

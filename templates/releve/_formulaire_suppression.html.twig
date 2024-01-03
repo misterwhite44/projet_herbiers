@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('app_releve_supprimer', {'id': releve.id}) }}" onsubmit="return confirm('Etes vous sur de vouloir supprimer ce relevé ?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('supprimer' ~ releve.id) }}">
+    <button class="btn btn-danger">Supprimer</button>
+</form>

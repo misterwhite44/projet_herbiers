@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier un Lieu{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Modifier un Lieu</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                {{ include('lieu/_formulaire.html.twig', {'button_label': 'Modifier', 'form_method': 'POST', 'form_action': path('app_lieu_modifier', {'id': lieu.id}) }) }}
+            </div>
+        </div>
+        <br>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <a class="btn btn-dark" href="{{ path('app_lieu_index') }}">Retour à la liste</a>
+            </div>
+        <br>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                {{ include('lieu/_formulaire_suppression.html.twig') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

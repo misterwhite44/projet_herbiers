@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un Lieu{% endblock %}
+
+{% block body %}
+    <h2 class="ml-3">Ajouter un Lieu</h2>
+    <div class="col-md-6 ml-3">
+        {{ include('lieu/_formulaire.html.twig', {'button_label': 'Ajouter', 'form_method': 'POST', 'form_action': path('app_lieu_ajouter') }) }}
+    </div>
+{% endblock %}
