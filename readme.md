@@ -6,6 +6,6 @@ Installation
   git@github.com:misterwhite44/projet_herbiers.git
 - Installez les dépendances:
   composer install
-- Configurez votre base de données dans le fichier .env.local
+- Configurez votre base de données dans le fichier .env
 - Appliquez les migrations.
   php bin/console doctrine:migrations:migrate
