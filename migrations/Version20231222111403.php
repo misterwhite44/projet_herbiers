@@ -7,31 +7,83 @@ namespace DoctrineMigrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-/**
- * Auto-generated Migration: Please modify to your needs!
- */
 final class Version20231222111403 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'Create tables lieu, releve, and messenger_messages';
     }
 
     public function up(Schema $schema): void
     {
-        // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE lieu (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE releve (id INT AUTO_INCREMENT NOT NULL, lieu_id INT NOT NULL, date DATETIME NOT NULL, releve_brut VARCHAR(255) NOT NULL, INDEX IDX_DDABFF836AB213CC (lieu_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE messenger_messages (id BIGINT AUTO_INCREMENT NOT NULL, body LONGTEXT NOT NULL, headers LONGTEXT NOT NULL, queue_name VARCHAR(190) NOT NULL, created_at DATETIME NOT NULL COMMENT \'(DC2Type:datetime_immutable)\', available_at DATETIME NOT NULL COMMENT \'(DC2Type:datetime_immutable)\', delivered_at DATETIME DEFAULT NULL COMMENT \'(DC2Type:datetime_immutable)\', INDEX IDX_75EA56E0FB7336F0 (queue_name), INDEX IDX_75EA56E0E3BD61CE (available_at), INDEX IDX_75EA56E016BA31DB (delivered_at), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('ALTER TABLE releve ADD CONSTRAINT FK_DDABFF836AB213CC FOREIGN KEY (lieu_id) REFERENCES lieu (id)');
+        // Create table lieu
+        $this->createTableLieu($schema);
+
+        // Create table releve
+        $this->createTableReleve($schema);
+
+        // Create table messenger_messages
+        $this->createTableMessengerMessages($schema);
+
+        // Add foreign key in releve table
+        $this->addForeignKeyInReleve($schema);
     }
 
     public function down(Schema $schema): void
     {
-        // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE releve DROP FOREIGN KEY FK_DDABFF836AB213CC');
-        $this->addSql('DROP TABLE lieu');
-        $this->addSql('DROP TABLE releve');
-        $this->addSql('DROP TABLE messenger_messages');
+        // Drop foreign key in releve table
+        $this->dropForeignKeyInReleve($schema);
+
+        // Drop tables in reverse order
+        $schema->dropTable('messenger_messages');
+        $schema->dropTable('releve');
+        $schema->dropTable('lieu');
+    }
+
+    private function createTableLieu(Schema $schema): void
+    {
+        $table = $schema->createTable('lieu');
+        $table->addColumn('id', 'integer', ['autoincrement' => true]);
+        $table->addColumn('nom', 'string', ['length' => 255]);
+        $table->setPrimaryKey(['id']);
+    }
+
+    private function createTableReleve(Schema $schema): void
+    {
+        $table = $schema->createTable('releve');
+        $table->addColumn('id', 'integer', ['autoincrement' => true]);
+        $table->addColumn('lieu_id', 'integer');
+        $table->addColumn('date', 'datetime');
+        $table->addColumn('releve_brut', 'string', ['length' => 255]);
+        $table->addIndex(['lieu_id']);
+        $table->setPrimaryKey(['id']);
+    }
+
+    private function createTableMessengerMessages(Schema $schema): void
+    {
+        $table = $schema->createTable('messenger_messages');
+        $table->addColumn('id', 'bigint', ['autoincrement' => true]);
+        $table->addColumn('body', 'text');
+        $table->addColumn('headers', 'text');
+        $table->addColumn('queue_name', 'string', ['length' => 190]);
+        $table->addColumn('created_at', 'datetime');
+        $table->addColumn('available_at', 'datetime');
+        $table->addColumn('delivered_at', 'datetime', ['default' => null]);
+        $table->addIndex(['queue_name']);
+        $table->addIndex(['available_at']);
+        $table->addIndex(['delivered_at']);
+        $table->setPrimaryKey(['id']);
+    }
+
+    private function addForeignKeyInReleve(Schema $schema): void
+    {
+        $table = $schema->getTable('releve');
+        $table->addForeignKeyConstraint('lieu', ['lieu_id'], ['id']);
+    }
+
+    private function dropForeignKeyInReleve(Schema $schema): void
+    {
+        $table = $schema->getTable('releve');
+        $table->removeForeignKey('FK_DDABFF836AB213CC');
     }
 }
