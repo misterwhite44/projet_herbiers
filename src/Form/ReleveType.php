@@ -17,20 +17,22 @@ class ReleveType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('date', DateType::class,[
+            ->add('date', DateType::class, [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
             ])
             ->add('releveBrut', TextType::class, [
                 'label' => 'Relevé brut',
-                'attr' => ['placeholder' => 'Ex: 3/3/3/9/6/6/1/9/4']
+                'attr' => ['placeholder' => 'Ex: 3/3/3/9/6/6/1/9/4'],
             ])
             ->add('lieu', EntityType::class, [
                 'class' => Lieu::class,
                 'choice_label' => 'nom',
             ])
-            ->add('OK', SubmitType::class ,['label' => 'Ajouter', 'attr' => ['class' => 'btn btn-success']])
-        ;
+            ->add('Ajouter', SubmitType::class, [
+                'label' => 'Ajouter',
+                'attr' => ['class' => 'btn btn-success'],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

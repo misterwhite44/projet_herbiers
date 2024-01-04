@@ -14,8 +14,9 @@ class LieuType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('OK', SubmitType::class ,['label' => 'Ajouter', 'attr' => ['class' => 'btn btn-success']])
-        ;
+            ->add('Ajouter', SubmitType::class, [
+                'attr' => ['class' => 'btn btn-success'],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
