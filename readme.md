@@ -14,7 +14,7 @@ Clonez le repository.
 git clone https://github.com/votre-utilisateur/herbiers.git
 Installez les dépendances.
 composer install
-Configurez votre base de données dans le fichier .env.
+Configurez votre base de données dans le fichier .env.local
 Appliquez les migrations.
 php bin/console doctrine:migrations:migrate
 Utilisation
