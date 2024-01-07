@@ -4,12 +4,12 @@
 
 {% block body %}
     <div class="container">
-        <h1>Modifier un Relevé</h1>
+        <h1>Modification de relevé</h1>
         <div class="col-md-6">
             {{ include('releve/_formulaire.html.twig', {'button_label': 'Modifier', 'form_method': 'POST', 'form_action': path('app_releve_modifier', {'id': releve.id}) }) }}
         </div>
         <br>
-        <a class="btn btn-dark" href="{{ path('app_releve_index') }}">Retour liste</a>
+        <a class="btn btn-dark" href="{{ path('app_releve_index') }}">Retour à la liste </a>
         {{ include('releve/_formulaire_suppression.html.twig') }}
     </div>
 {% endblock %}
