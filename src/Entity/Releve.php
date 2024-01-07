@@ -24,8 +24,8 @@ class Releve
     private ?Lieu $lieu = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'Le relevé brut ne peut pas être vide.')]
-    #[Assert\Regex(pattern: '/^\d+(\/\d+){8}$/', message: 'Le relevé brut doit être au format correct (ex: 3/3/3/9/6/6/1/9/4).')]
+    #[Assert\NotBlank(message: 'Le relevé ne peut pas être vide.')]
+    #[Assert\Regex(pattern: '/^\d+(\/\d+){8}$/', message: 'Le relevé doit être au format ex: 1/1/1/1/1/9/2/8/2).')]
     private ?string $releveBrut = null;
 
     public function getId(): ?int
