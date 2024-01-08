@@ -32,7 +32,6 @@ final class Version20231222111403 extends AbstractMigration
         $this->dropForeignKeyInReleve($schema);
 
         // Drop tables in reverse order
-        $schema->dropTable('messenger_messages');
         $schema->dropTable('releve');
         $schema->dropTable('lieu');
     }
