@@ -59,21 +59,7 @@ final class Version20231222111403 extends AbstractMigration
         $table->setPrimaryKey(['id']);
     }
 
-    private function createTableMessengerMessages(Schema $schema): void
-    {
-        $table = $schema->createTable('messenger_messages');
-        $table->addColumn('id', 'bigint', ['autoincrement' => true]);
-        $table->addColumn('body', 'text');
-        $table->addColumn('headers', 'text');
-        $table->addColumn('queue_name', 'string', ['length' => 190]);
-        $table->addColumn('created_at', 'datetime');
-        $table->addColumn('available_at', 'datetime');
-        $table->addColumn('delivered_at', 'datetime', ['default' => null]);
-        $table->addIndex(['queue_name']);
-        $table->addIndex(['available_at']);
-        $table->addIndex(['delivered_at']);
-        $table->setPrimaryKey(['id']);
-    }
+  
 
     private function addForeignKeyInReleve(Schema $schema): void
     {
