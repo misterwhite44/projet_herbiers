@@ -11,7 +11,7 @@ final class Version20231222111403 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return 'Create tables lieu, releve, and messenger_messages';
+        return 'Create tables lieu, releve,';
     }
 
     public function up(Schema $schema): void
@@ -21,9 +21,6 @@ final class Version20231222111403 extends AbstractMigration
 
         // Create table releve
         $this->createTableReleve($schema);
-
-        // Create table messenger_messages
-        $this->createTableMessengerMessages($schema);
 
         // Add foreign key in releve table
         $this->addForeignKeyInReleve($schema);
@@ -59,7 +56,7 @@ final class Version20231222111403 extends AbstractMigration
         $table->setPrimaryKey(['id']);
     }
 
-  
+
 
     private function addForeignKeyInReleve(Schema $schema): void
     {
